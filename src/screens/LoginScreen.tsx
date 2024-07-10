@@ -9,8 +9,20 @@ import {
   TextInput,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  Login: undefined;
+  CreateFindRoom: undefined;
+};
+
+
+type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
 
 const LoginScreen: React.FC = () =>{
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -25,9 +37,7 @@ const LoginScreen: React.FC = () =>{
               alt="App Logo"
               resizeMode="contain"
               style={styles.headerImg}
-              source={{
-                uri: 'https://assets.withfra.me/SignIn.2.png',
-              }} />
+              source={require('../components/imgs/cutta_icon.png')} />
 
             <Text style={styles.title}>
               Sign in to <Text style={{ color: '#075eec' }}>Cutta</Text>
@@ -72,6 +82,9 @@ const LoginScreen: React.FC = () =>{
               <TouchableOpacity
                 onPress={() => {
                   // handle onPress
+                  // login logic
+                  navigation.navigate('CreateFindRoom');
+
                 }}>
                 <View style={styles.btn}>
                   <Text style={styles.btnText}>Sign in</Text>
