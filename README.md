@@ -7,8 +7,8 @@ This React Native app enables users to participate in March Madness Calcutta auc
 - User authentication
 - Create and join auction rooms
 - Bid on teams with fake currency
-- Real-time auction updates
-- Track team performance and standings
+- Real-time auction updates (coming soon)
+- Track team performance and standings (coming soon)
 
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
@@ -26,12 +26,18 @@ To install the app, follow these steps:
 
 3. Install dependencies
 
-npm install
+```
+cd Calcutta_app
+npm install 
+
+```
 
 ## Using March Madness Calcutta Auction App
 
 To use the app, follow these steps:
 
 1. Start the development server
+```
 npx expo start
+```
 2. Use the Expo Go app on your mobile device to scan the QR code in the terminal
