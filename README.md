@@ -29,7 +29,6 @@ To install the app, follow these steps:
 ```
 cd Calcutta_app
 npm install 
-
 ```
 
 ## Using March Madness Calcutta Auction App

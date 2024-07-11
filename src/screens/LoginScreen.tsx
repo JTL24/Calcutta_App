@@ -11,6 +11,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { login } from '../api/auth';
 
 type RootStackParamList = {
   Login: undefined;
@@ -80,10 +81,15 @@ const LoginScreen: React.FC = () =>{
 
             <View style={styles.formAction}>
               <TouchableOpacity
-                onPress={() => {
-                  // handle onPress
-                  // login logic
-                  navigation.navigate('CreateFindRoom');
+                onPress={async () => {
+                  try {
+                    const result = await login(form.email, form.password);
+                    console.log('Login successful', result);
+                    navigation.navigate('CreateFindRoom');
+                  } catch (error) {
+                    console.error('Login failed', error);
+                    // Show error message to user
+                }
 
                 }}>
                 <View style={styles.btn}>
