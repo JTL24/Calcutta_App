@@ -83,6 +83,7 @@ const LoginScreen: React.FC = () =>{
               <TouchableOpacity
                 onPress={async () => {
                   try {
+                    console.log('Attempting login with:', form.email);
                     const result = await login(form.email, form.password);
                     console.log('Login successful', result);
                     navigation.navigate('CreateFindRoom');

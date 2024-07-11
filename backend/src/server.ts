@@ -19,7 +19,13 @@ const pool = new Pool({
   port: parseInt(process.env.DB_PORT || '5432'),
 });
 
-app.use(cors());
+app.use(cors({
+    origin: '*',  // Be more restrictive in production
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+  
+  
 app.use(express.json());
 
 // Test database connection
@@ -53,7 +59,8 @@ app.post('/login', async (req, res) => {
         res.status(400).json({ error: 'User not found' });
       }
     } catch (err) {
-      res.status(500).json({ error: 'Error during login' });
+      console.error('Login error:', err);  // Add this line
+      res.status(500).json({ error: 'Error during login', details: err });
     }
   });
 
