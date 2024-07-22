@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Platform } from 'react-native';
 let API_URL: string;
 
 // if (__DEV__) {
@@ -19,21 +18,25 @@ let API_URL: string;
 //     API_URL = 'https://your-production-api.com';
 //   }
 
-API_URL = 'https://7d51-216-171-37-73.ngrok-free.app';
+API_URL = 'http://localhost:3000';
+
 export const login = async (email: string, password: string) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, { email, password });
+    console.log('Sending request to:', `${API_URL}/auth/login`);
+    const response = await axios.post(`${API_URL}/auth/login`, { email, password });
+    console.log('Response received:', response.data);
     return response.data;
   } catch (error) {
-    throw error;
-  }
-};
-
-export const register = async (email: string, password: string) => {
-  try {
-    const response = await axios.post(`${API_URL}/register`, { email, password });
-    return response.data;
-  } catch (error) {
-    throw error;
+    console.error('Error in login request:', error);
+    if ((error as any).response) {
+      console.error('Error response:', (error as any).response.data);
+      throw (error as any).response.data;
+    } else if ((error as any).request) {
+      console.error('No response received');
+      throw new Error('No response from server');
+    } else {
+      console.error('Error setting up request:', (error as any).message);
+      throw new Error('Error setting up request');
+    }
   }
 };
